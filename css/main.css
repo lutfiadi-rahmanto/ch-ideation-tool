@@ -1,0 +1,158 @@
+.container{
+	/*position: absolute;
+	top: 0px;
+	left: 0px;*/
+	width: 1024px;
+	height: 768px;
+	background-color: #EAEAEA;
+}
+
+.prompt{
+	/* Position */
+	position: absolute;
+	top: 270px;
+	/*left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;*/
+	text-align: center;
+
+	font-family: brandonLight;
+	font-size: 36px;
+}
+
+.fill-in{
+	display: inline-block;
+	min-width: 2em;
+	color: #EAEAEA;
+	border-bottom: 1px solid black;
+}
+
+/* Brandon Grotesque has ' for nbsp */
+#fill-in-2{
+	display: none;
+	color: #EAEAEA;
+}
+#fill-in-3{
+	display: none;
+	color: #EAEAEA;
+}
+
+.comma{
+	display: none;
+}
+
+/* Tag */
+
+.tag{
+	/*
+	Width = sqrt(3)/2 Height
+	*/
+	position: absolute;
+	width: 135px; 
+	height: 156px;
+	background-size: 156px 156px;
+    background-color: #AAAAAA;
+
+    -webkit-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -moz-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -ms-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+}
+
+.tag p{
+  display: block;
+  position: relative;
+  margin: auto;
+   
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 24px;
+}
+
+/* Tag Image */
+.tag-selected{
+	/*
+	Width = sqrt(3)/2 Height
+	*/
+	position: absolute;
+	width: 135px; 
+	height: 156px;
+	background-size: 156px 156px;
+    background-color: #AAAAAA;
+
+    -webkit-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -moz-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -ms-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+
+}
+
+/*
+	Width : 135px
+	Height : 156px
+	Width : sqrt(3)/2 Height
+
+	Horizontal Spacing : 30px
+	Horizontal Indent : 50% Horizontal Spacing + 50% Width;
+	Vertical Spacing : 80% Horizontal Spacing : 24px;
+	Vertical Spacing : 75% Height + Vertical Spacing: 117px;
+*/
+
+#tag-1{
+	top: 266px;
+	left: 232px;
+}
+
+#tag-2{
+	top: 266px;
+	left: 397px;
+}
+
+#tag-3{
+	top: 266px;
+	left: 562px;
+}
+
+#tag-4{
+	top: 407px;
+	left: 315px;
+}
+
+#tag-5{
+	top: 407px;
+	left: 480px;
+}
+
+/*
+	Width : 135px;
+	Horizontal Spacing : 30px;
+	First Left : 512 - 232;
+*/
+
+#tag-selected-1{
+	display: none;
+	top: 495px;
+	left: 280px;
+}
