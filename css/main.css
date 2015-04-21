@@ -109,6 +109,22 @@
 
 }
 
+.tag-selected p{
+  display: block;
+  position: relative;
+  margin: auto;
+   
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-size: 24px;
+}
+
+
 /*
 	Width : 135px
 	Height : 156px
@@ -148,11 +164,25 @@
 /*
 	Width : 135px;
 	Horizontal Spacing : 30px;
-	First Left : 512 - 232;
+	Left : 512 - 232 : 280;
+	Middle : 512 - 68 : 444;
+	Right : 512 + 232 : 744;
 */
 
 #tag-selected-1{
 	display: none;
 	top: 495px;
+	left: 444px;
+}
+
+#tag-selected-2{
+	display: none;
+	top: 495px;
 	left: 280px;
+}
+
+#tag-selected-3{
+	display: none;
+	top: 495px;
+	left: 608px;
 }

@@ -1,6 +1,8 @@
 
-var tagNames = ["#tag-1", "#tag-2", "#tag-3", "#tag-4", "#tag-5"]
+var tagNames = ["#tag-1", "#tag-2", "#tag-3", "#tag-4", "#tag-5"];
+var tagSelectedNames = ["#tag-selected-1", "#tag-selected-2", "#tag-selected-3"];
 var tagDistance = 900;
+var selTagDistance = 500;
 var tagTarget = [
 	{
 		top: 266,
@@ -46,7 +48,38 @@ var tagInitial = [
 	}
 ];
 
+var selectedTagTarget = [
+	{
+		top: 495,
+		left: 444
+	},
+	{
+		top: 495,
+		left: 280
+	},
+	{
+		top: 495,
+		left: 608
+	}
+];
+
+var selectedTagHide = [
+	{
+		top: 495 + selTagDistance,
+		left: 444
+	},
+	{
+		top: 495 + selTagDistance,
+		left: 280
+	},
+	{
+		top: 495 + selTagDistance,
+		left: 608
+	}
+];
+
 // States
+var currentSelectedTag;
 var currentFill;
 var nextFill;
 state = 1;
@@ -55,6 +88,8 @@ $(document).ready(function(){
 	
 	// Hex Initialization
 	var length = tagNames.length;
+	var selLength = tagSelectedNames.length;
+
 	for(var i = 0; i < length; i++){
 		$(tagNames[i]).css("left", tagInitial[i].left + "px");
 		$(tagNames[i]).css("top", tagInitial[i].top + "px");
@@ -69,6 +104,19 @@ $(document).ready(function(){
     $(".fill-in").click(function(){
 
     	currentFill = $(this);
+    	nextFill = getNextFill(currentFill.attr("id"));
+    	// console.log(state);
+    	currentSelectedTag = $(tagSelectedNames[state-1]);
+    	// console.log(currentSelectedTag);
+
+    	// Move Image Tag Downwards
+        for(var i = 0; i < selLength; i++){
+        	$(tagSelectedNames[i]).animate({
+	        		"left": selectedTagHide[i].left + "px",
+					"top": selectedTagHide[i].top + "px"
+	        	}
+	        );
+        }
 
         $(".prompt").animate({
         		"left": '50px',
@@ -76,21 +124,26 @@ $(document).ready(function(){
         	}
         );
 
-        for(var i = 0; i < length; i++){
-        	
-			$(tagNames[i]).delay(100 + (length - i) * 150).animate({
-					"left": tagTarget[i].left + "px",
-					"top": tagTarget[i].top + "px"
-				}
-			);
-		}
+        animateTagTarget();
+        function animateTagTarget(){
+        	for(var i = 0; i < length; i++){  	
+				$(tagNames[i]).delay(100 + (length - i) * 150).animate({
+						"left": tagTarget[i].left + "px",
+						"top": tagTarget[i].top + "px"
+					}
+				);
+			}
+        }
+       
 
     });
 
     // Click function for tag
     $(".tag").click(function(){   		
-    	nextFill = getNextFill(currentFill.attr("id"));
-    	console.log(state);
+    	// nextFill = getNextFill(currentFill.attr("id"));
+    	// console.log(state);
+
+    	var thisTag = $(this);
 
     	// Edit the current fill-in
     	currentFill.css({
@@ -112,12 +165,22 @@ $(document).ready(function(){
     	var promptWidth = Number($(".prompt").css("width").replace('px',''));
 		var promptLeft = 512 - promptWidth/2;
 
-		// Move the Selected Tag
+		// Move the Selected Tag to Location of 'Selected' Tag
 		var tagIndex = tagNames.indexOf("#" + $(this).attr("id"));
-		$("#tag-selected-1").css({
+		$(currentSelectedTag).css({
 			"display": "block",
     		"left": tagTarget[tagIndex].left + "px",
     		"top": tagTarget[tagIndex].top + "px"
+    	});
+
+		// Copy HTML of Selected Tag
+		var selectedTagString = thisTag.children().html();
+		$(currentSelectedTag).children().html(selectedTagString);
+    	console.log(selectedTagString);
+
+		// Vanish the selected tag 
+    	$(this).css({
+    		"display": "none"
     	});
 
 		// Animate
@@ -125,16 +188,45 @@ $(document).ready(function(){
 			$(tagNames[i]).delay(i*100).animate({
 					"left": tagInitial[i].left + "px",
 					"top": tagInitial[i].top + "px"
+				},
+				function(){
+					// Callback
+					$(this).css({
+			    		"display": "block"
+			    	});
+
+					
 				}
 			);
 		}
 
-		$(".prompt").delay(550).animate({
+		// Animation
+		// Prompt Animation on Callback
+    	$(".prompt").delay(700).animate({
         		"left": promptLeft + 'px',
         		"top" : '270px'
-        	}
+        	}, function(){console.log("Animation-1 Done")}
         );
 
+        // Selected Tag Animation on Callback
+        $(currentSelectedTag).delay(700).animate({
+				"left": selectedTagTarget[state-1].left + 'px',
+	        	"top" : selectedTagTarget[state-1].top + 'px'
+	    	}, function(){console.log("Animation-2 Done")}
+    	);
+
+        console.log(state);
+
+        for(var i = 0; i < selLength; i++){
+        	if(i != state-1){
+        		$(tagSelectedNames[i]).delay(700).animate({
+						"left": selectedTagTarget[i].left + 'px',
+			        	"top" : selectedTagTarget[i].top + 'px'
+			    	}
+				);
+        	}
+        }
+		// 
     });
 
 });
