@@ -124,8 +124,35 @@
   font-size: 24px;
 }
 
+/* Collection */
+.collection{
+	/*
+	Width = sqrt(3)/2 Height
+	*/
+	position: absolute;
+	width: 135px; 
+	height: 156px;
+	background-size: 156px 156px;
+    background-color: #AAAAAA;
+
+    -webkit-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -moz-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    -ms-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+    clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+    );
+
+}
 
 /*
+	Tag Position
+
 	Width : 135px
 	Height : 156px
 	Width : sqrt(3)/2 Height
@@ -162,6 +189,8 @@
 }
 
 /*
+	Selected Tag Position
+
 	Width : 135px;
 	Horizontal Spacing : 30px;
 	Left : 512 - 232 : 280;
@@ -185,4 +214,52 @@
 	display: none;
 	top: 495px;
 	left: 608px;
+}
+
+/*
+	Collection Position
+	Top : 125
+	Middle : 266
+	Bottom : 407
+*/
+
+#collection-current{
+	display: none;
+	top: 266px;
+	left: 232px;
+}
+
+#collection-1{
+	display: none;
+	top: 266px;
+	left: 397px;
+}
+
+#collection-2{
+	display: none;
+	top: 125px;
+	left: 315px;
+}
+
+#collection-3{
+	display: none;
+	top: 407px;
+	left: 315px;
+}
+
+#collection-4{
+	display: none;
+	top: 266px;
+	left: 562px;
+}
+
+#collection-5{
+	display: none;
+	top: 125px;
+	left: 480px;
+}
+#collection-6{
+	display: none;
+	top: 125px;
+	left: 480px;
 }

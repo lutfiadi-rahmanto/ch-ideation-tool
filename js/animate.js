@@ -78,11 +78,28 @@ var selectedTagHide = [
 	}
 ];
 
+var inner = [
+	{
+		top: 266,
+		left: 232
+	},
+	{
+		top: 266,
+		left: 397
+	},
+	{
+		top: 266,
+		left: 562
+	}	
+];
+
 // States
 var currentSelectedTag;
 var currentFill;
 var nextFill;
-state = 1;
+var state = 1;
+var collectionOn = false;
+
 
 $(document).ready(function(){
 	
@@ -228,6 +245,83 @@ $(document).ready(function(){
         }
 		// 
     });
+
+	// Override Collection
+	$(document).click(function(e){
+
+		if(collectionOn==true){
+			if( $(e.target).closest(".collection").length > 0 ) {
+		        
+		    }
+
+		    else{
+		    	collectionOn = false;
+		    	console.log("Close");
+
+		    	// Move Image Tag Downwards
+		        for(var i = 0; i < selLength; i++){
+		        	$(tagSelectedNames[i]).animate({
+			        		"left": selectedTagTarget[i].left + "px",
+							"top": selectedTagTarget[i].top + "px"
+			        	}, function(){
+			        		// Callback
+
+			        		$(currentSelectedTag).css({
+								"display": "block",
+					    	});
+			        	}
+			        );
+		        }
+
+		    }
+		}
+	    
+	    
+	    
+	});
+
+	// Click function for Collection
+    $(".tag-selected").click(function(){       	
+
+    	currentSelectedTag = this;
+
+    	$(".collection").css({
+			"display": "block",
+			"left": $(this).css("left"),
+			"top": $(this).css("top")
+    	});
+
+    	// Hide the Selected Tag
+		$(currentSelectedTag).css({
+			"display": "none",
+    	});
+
+    	// Move Image Tag Downwards
+        for(var i = 0; i < selLength; i++){
+        	$(tagSelectedNames[i]).animate({
+	        		"left": selectedTagHide[i].left + "px",
+					"top": selectedTagHide[i].top + "px"
+	        	}, function(){
+	        		// Callback
+	        		collectionOn = true;  
+	        		console.log(collectionOn);
+
+	     //    		$(currentSelectedTag).css({
+						// "display": "block",
+			   //  	});
+	        	}
+	        );
+        }
+
+   //  	$(currentSelectedTag).css({
+			// "display": "block",
+   //  		"left": tagTarget[tagIndex].left + "px",
+   //  		"top": tagTarget[tagIndex].top + "px"
+   //  	});
+		
+    });
+
+	// Collection End
 
 });
 
