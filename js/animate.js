@@ -3,6 +3,62 @@ var tagNames = ["#tag-1", "#tag-2", "#tag-3", "#tag-4", "#tag-5"];
 var tagSelectedNames = ["#tag-selected-1", "#tag-selected-2", "#tag-selected-3"];
 var tagDistance = 900;
 var selTagDistance = 500;
+
+
+var middleRowAll = [
+	["#collection-current"],
+	["#collection-1", "#collection-2", "#collection-3"],
+	["#collection-4", "#collection-5", "#collection-6"]
+]
+
+var middleRow = [
+	["#collection-1", "#collection-2", "#collection-3"],
+	["#collection-4", "#collection-5", "#collection-6"]
+]
+
+var middleRowCoord = [
+	{
+		top: 266,
+		left: 397
+	},
+	{
+		top: 266,
+		left: 562
+	}
+]
+
+var topRow = [
+	"#collection-2", 
+	"#collection-5"
+]
+
+var topRowCoord = [
+	{
+		top: 125,
+		left: 315
+	},
+	{
+		top: 125,
+		left: 480
+	}
+]
+
+var bottomRow = [
+	"#collection-3", 
+	"#collection-6"
+]
+
+var bottomRowCoord = [
+	{
+		top: 407,
+		left: 315
+	},
+	{
+		top: 407,
+		left: 480
+	}
+]
+
 var tagTarget = [
 	{
 		top: 266,
@@ -258,7 +314,7 @@ $(document).ready(function(){
 		    	collectionOn = false;
 		    	console.log("Close");
 
-		    	// Move Image Tag Downwards
+		    	// Move Image Tag Upwards
 		        for(var i = 0; i < selLength; i++){
 		        	$(tagSelectedNames[i]).animate({
 			        		"left": selectedTagTarget[i].left + "px",
@@ -273,6 +329,57 @@ $(document).ready(function(){
 			        );
 		        }
 
+		        // Move The Collection Back
+		        var tagIndex = tagSelectedNames.indexOf("#" + $(currentSelectedTag).attr("id"));
+
+		        for(var i = 0; i < topRow.length; i++){
+		    		$(topRow[i]).animate({
+			        		"left": middleRowCoord[i].left + "px",
+							"top": middleRowCoord[i].top + "px"
+			        	}, {duration: 400, queue: false}
+			        );		        
+		    	}
+
+		    	for(var i = 0; i < bottomRow.length; i++){		    		
+			        $(bottomRow[i]).animate({
+			        		"left": middleRowCoord[i].left + "px",
+							"top": middleRowCoord[i].top + "px"
+			        	}, {duration: 400, queue: false}
+			        );
+		    	}
+
+		    	for(var j = 0; j < middleRowAll.length; j++){
+		    		for(var i = 0; i < middleRowAll[j].length; i++){
+			    		$(middleRowAll[j][i]).delay(500).animate({
+				        		"left": inner[0].left + "px",
+								"top": inner[0].top + "px"
+				        	}, {duration: 400}
+				        );
+			    	}
+		    	}	
+
+		   //  	$(".collection").animate({
+					// "left": inner[0].left + 'px',
+					// "top": inner[0].top + 'px'
+		   //  	}, 400);
+
+		    	putEverythingBack();
+		    	function putEverythingBack(){
+		    		$(".collection").animate({
+						"left": selectedTagTarget[tagIndex].left + "px",
+	    				"top": selectedTagTarget[tagIndex].top + "px"
+			    	}, {duration: 400}, function(){
+				    		// Callback
+				    		$(".collection").css({
+								"display": "none",
+								"left": $(this).css("left"),
+								"top": $(this).css("top")
+					    	});
+			    		}
+			    	);
+		    	}
+
+
 		    }
 		}
 	    
@@ -282,6 +389,8 @@ $(document).ready(function(){
 
 	// Click function for Collection
     $(".tag-selected").click(function(){       	
+
+    	var duration = [400, 400, 400, 400, 400];
 
     	currentSelectedTag = this;
 
@@ -296,6 +405,52 @@ $(document).ready(function(){
 			"display": "none",
     	});
 
+		// Move the Collection Upwards
+		// Act 0
+		$(".collection").animate({
+			"left": inner[0].left + 'px',
+			"top": inner[0].top + 'px'
+    	}, duration[0]);
+
+    	// Act 1   
+    	for(var j = 0; j < middleRow.length; j++){
+    		for(var i = 0; i < middleRow[j].length; i++){
+	    		$(middleRow[j][i]).animate({
+		        		"left": middleRowCoord[j].left + "px",
+						"top": middleRowCoord[j].top + "px"
+		        	}, duration[1]
+		        );
+	    	}
+    	}	
+
+    	// Act 2
+    	// for(var i = 0; i < middleRow[1].length; i++){
+    	// 	$(middleRow[1][i]).animate({
+	    //     		"left": middleRowCoord[1].left + "px",
+					// "top": middleRowCoord[1].top + "px"
+	    //     	}, duration[2]
+	    //     );
+    	// }
+
+    	// Act 3
+    	for(var i = 0; i < topRow.length; i++){
+    		$(topRow[i]).animate({
+	        		"left": topRowCoord[i].left + "px",
+					"top": topRowCoord[i].top + "px"
+	        	}, duration[3]
+	        );
+    	}
+
+    	// Act 4
+    	for(var i = 0; i < bottomRow.length; i++){
+    		$(bottomRow[i]).animate({
+	        		"left": bottomRowCoord[i].left + "px",
+					"top": bottomRowCoord[i].top + "px"
+	        	}, duration[4]
+	        );
+    	}
+
+
     	// Move Image Tag Downwards
         for(var i = 0; i < selLength; i++){
         	$(tagSelectedNames[i]).animate({
@@ -306,18 +461,9 @@ $(document).ready(function(){
 	        		collectionOn = true;  
 	        		console.log(collectionOn);
 
-	     //    		$(currentSelectedTag).css({
-						// "display": "block",
-			   //  	});
 	        	}
 	        );
         }
-
-   //  	$(currentSelectedTag).css({
-			// "display": "block",
-   //  		"left": tagTarget[tagIndex].left + "px",
-   //  		"top": tagTarget[tagIndex].top + "px"
-   //  	});
 		
     });
 
