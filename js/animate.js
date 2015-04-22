@@ -314,21 +314,6 @@ $(document).ready(function(){
 		    	collectionOn = false;
 		    	console.log("Close");
 
-		    	// Move Image Tag Upwards
-		        for(var i = 0; i < selLength; i++){
-		        	$(tagSelectedNames[i]).animate({
-			        		"left": selectedTagTarget[i].left + "px",
-							"top": selectedTagTarget[i].top + "px"
-			        	}, function(){
-			        		// Callback
-
-			        		$(currentSelectedTag).css({
-								"display": "block",
-					    	});
-			        	}
-			        );
-		        }
-
 		        // Move The Collection Back
 		        var tagIndex = tagSelectedNames.indexOf("#" + $(currentSelectedTag).attr("id"));
 
@@ -358,32 +343,49 @@ $(document).ready(function(){
 			    	}
 		    	}	
 
-		   //  	$(".collection").animate({
-					// "left": inner[0].left + 'px',
-					// "top": inner[0].top + 'px'
-		   //  	}, 400);
+		    	// Move Image Tag Upwards		   		
+	   			for(var i = 0; i < selLength; i++){
+		        	$(tagSelectedNames[i]).animate({
+			        		"left": selectedTagTarget[i].left + "px",
+							"top": selectedTagTarget[i].top + "px"
+			        	}
+			        );
+		        }  
 
-		    	putEverythingBack();
-		    	function putEverythingBack(){
-		    		$(".collection").animate({
-						"left": selectedTagTarget[tagIndex].left + "px",
-	    				"top": selectedTagTarget[tagIndex].top + "px"
-			    	}, {duration: 400}, function(){
-				    		// Callback
-				    		$(".collection").css({
-								"display": "none",
-								"left": $(this).css("left"),
-								"top": $(this).css("top")
-					    	});
-			    		}
-			    	);
-		    	}
+		    	$(".collection").animate({
+					"left": selectedTagTarget[tagIndex].left + "px",
+    				"top": selectedTagTarget[tagIndex].top + "px"
+		    	}, function(){
+		    			console.log("callback here")
+			    		// Callback
+			    		$(".collection").css({
+							"display": "none",
+							"left": $(this).css("left"),
+							"top": $(this).css("top")
+				    	});
 
+				    	$(currentSelectedTag).css({
+									"display": "block",
+									"left": selectedTagTarget[tagIndex].left + "px",
+    								"top": selectedTagTarget[tagIndex].top + "px"
+						    	});
+
+				    	// Move Image Tag Upwards		   		
+				    	// for(var i = 0; i < selLength; i++){
+				     //    	$(tagSelectedNames[i]).animate({
+					    //     		"left": selectedTagTarget[i].left + "px",
+									// "top": selectedTagTarget[i].top + "px"
+					    //     	}
+					    //     );
+				     //    }  
+				    	
+		    		}
+		    	);
+
+		   		      
 
 		    }
-		}
-	    
-	    
+		}    
 	    
 	});
 
@@ -423,15 +425,6 @@ $(document).ready(function(){
 	    	}
     	}	
 
-    	// Act 2
-    	// for(var i = 0; i < middleRow[1].length; i++){
-    	// 	$(middleRow[1][i]).animate({
-	    //     		"left": middleRowCoord[1].left + "px",
-					// "top": middleRowCoord[1].top + "px"
-	    //     	}, duration[2]
-	    //     );
-    	// }
-
     	// Act 3
     	for(var i = 0; i < topRow.length; i++){
     		$(topRow[i]).animate({
@@ -468,6 +461,9 @@ $(document).ready(function(){
     });
 
 	// Collection End
+
+	
+				
 
 });
 
